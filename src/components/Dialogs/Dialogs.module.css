@@ -1,0 +1,17 @@
+.dialogs {
+    display: grid;
+    padding: 20px;
+    background-color: aqua;
+    border-radius: 20px;
+
+    grid-template-columns: 2fr 10fr;
+
+    grid-template-areas:
+        "d m"
+        "d m";
+}
+
+.chat__items {
+    grid-area: d;
+    text-align: center;
+}
