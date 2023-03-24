@@ -10,8 +10,7 @@ const Proffile = (props) => {
       <MyPost
         posts={props.proffilePage.posts}
         newPostText={props.proffilePage.newPostText}
-        addPost={props.addPost} 
-        updateNewPostText={props.updateNewPostText}/>
+        dispatch={props.dispatch} />
     </main>
   )
 }
