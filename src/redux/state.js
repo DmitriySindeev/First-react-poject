@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
+
 let store = {
     _state: {
         proffilePage: {
@@ -39,20 +42,26 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 message: this._state.proffilePage.newPostText,
                 likeCount: 0
             }
             this._state.proffilePage.posts.push(newPost)
+            this._state.proffilePage.newPostText = ''
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST') {
+        } else if (action.type === UPDATE_NEW_POST) {
             this._state.proffilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
     }
 }
+
+ export const addPostActionCreator = () => ({ type: ADD_POST })
+
+
+export const updatePostActionCreator = (text) => ({ type: UPDATE_NEW_POST, newText: text })
 
 window.store = store;
 
