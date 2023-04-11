@@ -1,10 +1,5 @@
-const ADD_POST = 'ADD-POST';
-
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
-
-const SEND_MESSAGE = 'SEND_MESSAGE';
-
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
+import dialogsReducer from "./dialogs-reducer";
+import proffileReducer from "./proffile-reducer";
 
 let store = {
     _state: {
@@ -48,40 +43,11 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.proffilePage.newPostText,
-                likeCount: 0
-            }
-            this._state.proffilePage.posts.push(newPost)
-            this._state.proffilePage.newPostText = ''
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST) {
-            this._state.proffilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            let newMessage = { 
-                id: 6, 
-                message: this._state.dialogsPage.newMessageText 
-            }
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageText = ''
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageText = action.body
-            this._callSubscriber(this._state);
-        }
+        this._state.proffilePage = proffileReducer(this._state.proffilePage, action)  
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber(this._state);
     }
 }
-
-export const addPostActionCreator = () => ({ type: ADD_POST })
-
-export const updatePostActionCreator = (text) => ({ type: UPDATE_NEW_POST, newText: text })
-
-export const sendMessageCreator = () => ({ type: SEND_MESSAGE })
-
-export const updateNewMessageTextCreator = (body) => ({ type: UPDATE_NEW_MESSAGE_TEXT, body: body })
 
 window.store = store;
 
