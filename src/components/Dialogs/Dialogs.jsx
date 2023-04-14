@@ -5,11 +5,11 @@ import Message from "./Messages/Message";
 
 const Dialogs = (props) => {
 
-    let dialogsElement = props.dialogs.map(d => <Chat name={d.name} id={d.id} />)
+    let dialogsElement = props.dialogsPage.dialogs.map(d => <Chat name={d.name} key={d.id} id={d.id} />)
 
-    let messagesElement = props.messages.map(m => <Message message={m.message} id={m.id} />)
+    let messagesElement = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id} id={m.id} />)
 
-    let newMessageText = props.newMessageText;
+    let newMessageText = props.dialogsPage.newMessageText;
 
     let onSendMessageClick = () => {
         props.sendMessage()

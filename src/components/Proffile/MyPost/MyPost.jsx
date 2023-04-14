@@ -4,16 +4,16 @@ import Post from './Posts/Post';
 
 const MyPost = (props) => {
 
-  let postElement = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount} id={p.id} />)
+  let postElement = props.proffilePage.posts.map(p => <Post message={p.message} key={p.id} likeCount={p.likeCount} id={p.id} />)
 
-  let newPostElement = React.useRef();
+  let newPostText = props.proffilePage.newPostText
 
   let onPostClick = () => {
     props.addPost();
   }
 
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
+  let onPostChange = (e) => {
+    let text = e.target.value
     props.updateNewPostText(text)
   }
 
@@ -22,7 +22,7 @@ const MyPost = (props) => {
       My post
       <div>
         <div>
-          <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} cols="120" rows="5" />
+          <textarea onChange={onPostChange} value={newPostText} cols="120" rows="5" />
         </div>
         <div>
           <button onClick={onPostClick}>Add Post</button>
